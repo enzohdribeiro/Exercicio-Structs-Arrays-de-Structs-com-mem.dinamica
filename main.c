@@ -39,27 +39,30 @@ int main() {
 	printf("com nota igual ou maior ao valor fornecido.\n");
 	printf("------------------------------------------------------------\n");
 	
-
-    printf("Insira o número de estudantes da turma:\n");
-    scanf("%d", &n);
+    while(1==1){
+        printf("Insira o número de estudantes da turma ou digite 0(zero) para sair:\n");
+        scanf("%d", &n);
+        if(n==0) break;
+        
+        TURMA *t = malloc(sizeof(TURMA) + n * sizeof(ALUNO));
+        
+        for(i=0;i<n;i++){
+        printf("Insira o número USP do estudante %i\n",(i+1));
+        scanf("%d", &t->A[i].nusp);
+        }
+        
+        for(i=0;i<n;i++){
+        printf("Insira a nota do estudante %i\n",(i+1));
+        scanf("%f", &t->A[i].nota);
+        }
+        
+    	imprimir(t, n);
+    	
+    	printf("Insira a nota mínima:\n");
+    	scanf("%f", &notaMin);
     
-    TURMA *t = malloc(sizeof(TURMA) + n * sizeof(ALUNO));
-    
-    for(i=0;i<n;i++){
-    printf("Insira o número USP do estudante %i\n",(i+1));
-    scanf("%d", &t->A[i].nusp);
-    }
-    
-    for(i=0;i<n;i++){
-    printf("Insira a nota do estudante %i\n",(i+1));
-    scanf("%f", &t->A[i].nota);
-    }
-    
-	imprimir(t, n);
-	
-	printf("Insira a nota mínima:\n");
-	scanf("%f", &notaMin);
-
-	printf("Alunos com nota %0.2f ou mais: %i\n",notaMin,contagemNotas(t,notaMin,n));
-	return 0;
+    	printf("Alunos com nota %0.2f ou mais: %i\n",notaMin,contagemNotas(t,notaMin,n));
+    	free(t);
+    }	
+    return 0;    
 }
